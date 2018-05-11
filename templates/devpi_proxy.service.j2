@@ -9,7 +9,7 @@ EnvironmentFile=/etc/environment
 Environment=http_proxy={{ devpi_proxy }}
 Environment=https_proxy={{ devpi_proxy }}
 {% endif %}
-ExecStart=/usr/local/bin/devpi-server --host={{ devpi_listen_address }} --port={{ devpi_listen_port }}
+ExecStart=/usr/local/bin/devpi-server --host={{ devpi_listen_address }} --port={{ devpi_listen_port }} {{ devpi_additional_parameters|join(' ') }}
 Restart=always
 RestartSec=2
 

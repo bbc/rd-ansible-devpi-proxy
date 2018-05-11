@@ -17,6 +17,9 @@
     devpi_listen_address: "0.0.0.0"
     # Set up proxy to allow devpi to get packages
     devpi_proxy: "{{ lookup('env','http_proxy') }}"
+    # Extra test parameters
+    devpi_additional_parameters:
+      - "--mirror-cache-expiry 1800"
   roles:
     - role: "{{ playbook_dir | dirname }}"
   environment: "{{ proxy_env }}"
