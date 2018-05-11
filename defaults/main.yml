@@ -22,3 +22,4 @@ devpi_listen_address: "127.0.0.1"                     # This needs to be set to 
 devpi_listen_port: 9000                               # Port that the devpi service listens on
 devpi_test_package: pluggy                            # This is the upstream package we force remove and reinstall to test things are working
 devpi_proxy: ""                                       # Hard code specific proxy into the service file
+devpi_additional_parameters: []                       # Extra paramaters, these will be passed to the devpi-server when it starts

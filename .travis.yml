@@ -11,8 +11,8 @@ services:
   - docker
 
 install:
-  - wget https://releases.hashicorp.com/vagrant/2.0.4/vagrant_2.0.4_x86_64.deb
-  - sudo apt install ./vagrant_2.0.4_x86_64.deb -y
+  - wget https://releases.hashicorp.com/vagrant/2.1.1/vagrant_2.1.1_x86_64.deb
+  - sudo apt install ./vagrant_2.1.1_x86_64.deb -y
   - pip install -U pip wheel
   - pip install ansible
 
