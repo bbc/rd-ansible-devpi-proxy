@@ -1,4 +1,4 @@
-rd-ansible-devpi-proxy
+rd-ansible-devpi-proxy [![Build Status](https://travis-ci.org/jrosser/rd-ansible-devpi-proxy.svg?branch=master)](https://travis-ci.org/jrosser/rd-ansible-devpi-proxy)
 =========
 
 This module installs devpi which then acts as a caching pypi proxy server
