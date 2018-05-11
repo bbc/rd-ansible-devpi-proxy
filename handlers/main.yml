@@ -1,0 +1,19 @@
+---
+# name: rd-ansible-devpi-proxy/handlers
+# description: All our handlers for rd-ansible-devpi-proxy go in here
+
+- name: restart service
+  service:
+    name: devpi_proxy
+    state: restarted
+    enabled: yes
+  listen: restart_devpi
+
+- name: Pull a package from itself to check it is working
+  shell: "pip3 uninstall -y {{ devpi_test_package }} | true ; pip3 install -i http://127.0.0.1:{{ devpi_listen_port }}/root/pypi/+simple/ {{ devpi_test_package }}"
+  args:
+    warn: false
+  listen: restart_devpi
+  environment: 
+    http_proxy: ''
+    https_proxy: ''

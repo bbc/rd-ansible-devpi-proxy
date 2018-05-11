@@ -1,0 +1,22 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: true
+  become_method: sudo
+  vars:
+    # Use Python 3 instead of 2
+    ansible_python_interpreter: /usr/bin/python3
+
+    # Proxy
+    proxy_env:
+      http_proxy: "{{ lookup('env','http_proxy') }}"
+      https_proxy: "{{ lookup('env','https_proxy') }}"
+      rsync_proxy: "{{ lookup('env','rsync_proxy') }}"
+
+    # rd-ansible-devpi-variables
+    devpi_listen_address: "0.0.0.0"
+    # Set up proxy to allow devpi to get packages
+    devpi_proxy: "{{ lookup('env','http_proxy') }}"
+  roles:
+    - role: "{{ playbook_dir | dirname }}"
+  environment: "{{ proxy_env }}"

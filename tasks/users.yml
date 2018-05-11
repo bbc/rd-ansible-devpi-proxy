@@ -1,0 +1,18 @@
+---
+# module: rd-ansible-devpi-proxy/tasks/users
+# description: Make sure our user exists for service
+
+- name: Ensure "{{ devpi_user }}" group exists
+  group:
+    name: "{{ devpi_user }}"
+    state: present
+
+- name: Ensure user "{{ devpi_user }}" exists on host
+  user:
+    name: "{{ devpi_user }}"
+    state: present
+
+- name: Get home folder of user "{{ devpi_user }}"
+  shell: "eval echo ~{{ devpi_user }}"
+  changed_when: false
+  register: user_path

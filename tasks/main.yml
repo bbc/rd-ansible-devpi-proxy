@@ -1,0 +1,12 @@
+---
+# module: rd-ansible-devpi-proxy/tasks
+# description: Install rd-ansible-devpi-proxy onto Ubuntu 16
+
+- name: Create devpi users
+  include_tasks: users.yml
+
+- name: Install rd-ansible-devpi-proxy
+  include_tasks: install.yml
+
+- name: Configure rd-ansible-devpi-proxy
+  include_tasks: configure.yml

@@ -1,0 +1,9 @@
+---
+# module: rd-ansible-devpi-proxy/tasks/configure
+# description: Configure rd-ansible-devpi-proxy
+
+- name: Initialise devpi
+  command: "su {{ devpi_user }} -c 'devpi-server --init'"
+  args:
+    creates: "{{ user_path.stdout }}/{{ devpi_config_path }}"
+    warn: false

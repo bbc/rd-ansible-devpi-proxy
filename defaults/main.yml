@@ -1,0 +1,24 @@
+---
+# name: rd-ansible-devpi-proxy/defaults
+# description: ALL our default variables for rd-ansible-devpi-proxy go in here
+#------------------------------------------------------------------------------
+# Packages - All our required packages we need installing
+#------------------------------------------------------------------------------
+
+# - pre-requisites -
+
+devpi_packages:
+  - virtualenv
+  - python3-pip
+
+devpi_pip_packages:
+  - devpi
+  - devpi-server
+
+devpi_user: "devpi"                                   # What user should we run devpi under
+
+devpi_config_path: '.devpi/server'                    # The path devpi uses for config ( located in home directory of above user )
+devpi_listen_address: "127.0.0.1"                     # This needs to be set to more than localhost if no reverse proxy in front
+devpi_listen_port: 9000                               # Port that the devpi service listens on
+devpi_test_package: pluggy                            # This is the upstream package we force remove and reinstall to test things are working
+devpi_proxy: ""                                       # Hard code specific proxy into the service file

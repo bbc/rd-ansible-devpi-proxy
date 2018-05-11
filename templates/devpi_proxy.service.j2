@@ -1,0 +1,17 @@
+### MANAGED BY {{ role_path|basename }} ANSIBLE ROLE ###
+Description=DevPi caching proxy
+After=network.target
+
+[Service]
+User={{ devpi_user }}
+EnvironmentFile=/etc/environment
+{% if devpi_proxy | length > 0 %}
+Environment=http_proxy={{ devpi_proxy }}
+Environment=https_proxy={{ devpi_proxy }}
+{% endif %}
+ExecStart=/usr/local/bin/devpi-server --host={{ devpi_listen_address }} --port={{ devpi_listen_port }}
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

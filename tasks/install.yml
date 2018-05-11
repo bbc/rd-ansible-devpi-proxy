@@ -1,0 +1,39 @@
+---
+# module: rd-ansible-devpi-proxy/tasks/install
+# description: Install our required packages for rd-ansible-devpi-proxy
+
+- name: Update apt-cache - use command since apt update cache module is unreliable
+  command: "apt-get update"
+  changed_when: false
+  args:
+    warn: false
+    
+- name: Install all required packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ devpi_packages }}"
+
+- name: Install devpi
+  pip:
+    name: "{{ item }}"
+    executable: /usr/bin/pip3
+  with_items: "{{ devpi_pip_packages }}"
+  notify: restart_devpi
+
+- name: Copy systemd service file
+  template:
+    src: devpi_proxy.service.j2
+    dest: /etc/systemd/system/devpi_proxy.service
+  register: reload_service
+  notify: restart_devpi
+
+- name: reload systemd
+  systemd:
+    daemon_reload: yes
+  when: reload_service.changed
+
+- name: enable service
+  service:
+    name: devpi_proxy
+    enabled: yes
