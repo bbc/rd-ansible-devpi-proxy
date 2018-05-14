@@ -2,6 +2,11 @@
 # name: rd-ansible-devpi-proxy/handlers
 # description: All our handlers for rd-ansible-devpi-proxy go in here
 
+- name: reload systemd
+  systemd:
+    daemon_reload: yes
+  listen: restart_devpi
+
 - name: restart service
   service:
     name: devpi_proxy
@@ -14,6 +19,6 @@
   args:
     warn: false
   listen: restart_devpi
-  environment: 
+  environment:
     http_proxy: ''
     https_proxy: ''

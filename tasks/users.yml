@@ -13,6 +13,10 @@
     state: present
 
 - name: Get home folder of user "{{ devpi_user }}"
-  shell: "eval echo ~{{ devpi_user }}"
+  shell: "eval 'echo ~{{ devpi_user }}'"
   changed_when: false
   register: user_path
+  tags:
+    # Ansible is not reliable with checking home folders of users,
+    # we need to shell out here and ignore lint tests
+    - skip_ansible_lint

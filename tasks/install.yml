@@ -7,7 +7,7 @@
   changed_when: false
   args:
     warn: false
-    
+
 - name: Install all required packages
   package:
     name: "{{ item }}"
@@ -25,13 +25,7 @@
   template:
     src: devpi_proxy.service.j2
     dest: /etc/systemd/system/devpi_proxy.service
-  register: reload_service
   notify: restart_devpi
-
-- name: reload systemd
-  systemd:
-    daemon_reload: yes
-  when: reload_service.changed
 
 - name: enable service
   service:
